@@ -3,7 +3,7 @@ import { Elysia } from "elysia";
 const app = new Elysia({ prefix: "/handlers" })
 	//* the function `() => "hello world"` is the handler for the route
 	.get("/", "hello world")
-	.get("/video", Bun.file("public/flamingo.mp4"))
+	.get("/video", () => Bun.file("public/flamingo.mp4"))
 	.get("/error", ({ error }) => error(418, "Kirifuji Nagisa"))
 	.get("/set", ({ set, cookie }) => {
 		set.status = Math.random() > 0.5 ? 418 : "Accepted";

@@ -1,13 +1,14 @@
 import { staticPlugin } from "@elysiajs/static";
 import { swagger } from "@elysiajs/swagger";
 import { Elysia, error } from "elysia";
+
 import atGlance from "./at-glance";
+import context from "./context";
+import handlers from "./handlers";
 import paths from "./paths";
 import routes from "./routes";
-import handlers from "./handlers";
-import context from "./context";
 
-const app = new Elysia()
+new Elysia()
 	.use(staticPlugin())
 	.use(swagger())
 	.get("/", () => "Hello Elysia")
@@ -20,6 +21,10 @@ const app = new Elysia()
 		if (code === "NOT_FOUND") return Bun.file("public/404.html");
 
 		return error("Internal Server Error", 500);
-	});
-
-export default app;
+	})
+	.ws("/ws", {
+		open(ws) {
+			ws.send("hello");
+		},
+	})
+	.listen(3000);
