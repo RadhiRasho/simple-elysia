@@ -7,7 +7,7 @@
 		"start": "NODE_ENV=production bun dist/index.js",
 		"test": "bun test",
 		"check": "biome check",
-		"biome": "biome check --write"
+		"format": "biome check --write"
 	},
 	"dependencies": {
 		"@elysiajs/static": "latest",
