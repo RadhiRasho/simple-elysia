@@ -1,7 +1,11 @@
 import { Elysia } from "elysia";
 
-const app = new Elysia({ prefix: "/context" }).get("/", (req, res) => {
-	res.send(req.context);
-});
-
-export default app;
+export const context = new Elysia({ prefix: "/context" })
+	.get("/", ({ store }) => {
+		console.log(store);
+	})
+	.ws("/realtime", {
+		message(ws, message) {
+			ws.send(`Got: ${message}`);
+		},
+	});

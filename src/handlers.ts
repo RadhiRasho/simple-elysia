@@ -1,6 +1,6 @@
-import { Elysia } from "elysia";
+import { Elysia, error } from "elysia";
 
-const app = new Elysia({ prefix: "/handlers" })
+export const handlers = new Elysia({ prefix: "/handlers" })
 	//* the function `() => "hello world"` is the handler for the route
 	.get("/", "hello world")
 	.get("/video", () => Bun.file("public/flamingo.mp4"))
@@ -22,5 +22,3 @@ const app = new Elysia({ prefix: "/handlers" })
 	.get("/shortres", "short hi")
 	.get("/res", () => "normal Hiiii")
 	.get("/response", () => new Response("Long ass hiiiiiiiiii"));
-
-export default app;
