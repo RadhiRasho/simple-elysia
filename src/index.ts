@@ -24,7 +24,12 @@ const app = new Elysia()
 	})
 	.ws("/ws", {
 		open(ws) {
-			ws.send("hello");
+			ws.subscribe("chat");
+
+			ws.send("Welcome to the chat room");
+		},
+		message(ws, message) {
+			ws.raw.publish("chat", JSON.stringify(message));
 		},
 	})
 	.listen(3000);
