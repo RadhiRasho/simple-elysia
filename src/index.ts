@@ -12,6 +12,9 @@ const app = new Elysia()
 	.use(staticPlugin())
 	.use(swagger())
 	.get("/", () => "Hello Elysia")
+	.get("/exp", () => {
+		return Bun.file("public/1090-Experiment 8.html");
+	})
 	.use(atGlance)
 	.use(routes)
 	.use(paths)
